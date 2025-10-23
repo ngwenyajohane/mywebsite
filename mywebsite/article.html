@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ByteRead report on convergent grand challenges at the intersection of AI, biology, and medicine. Curated research summaries and analysis.">
+  <meta name="theme-color" content="#ffffff">
+  <title>Convergent Grand Challenges – ByteRead</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23236ae8'/%3E%3Ctext x='50' y='57' font-size='50' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3E%3C/tspan%3E%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+:root { font-family:'Inter',sans-serif; scroll-behavior:smooth; }
+
+/* Base body style */
+body {
+  background-color: #fff;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode body */
+html.dark body {
+  background-color: #1a1a1a;
+  color: #fff !important; /* Force all body text to white */
+}
+
+/* Smooth transitions for containers */
+.bg-white, .border, .shadow-sm {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Dark mode adjustments */
+.dark .bg-white { background-color: #262626 !important; }
+.dark .border-gray-200 { border-color: #fffefe !important; }
+.dark .text-gray-900,
+.dark .text-gray-800,
+.dark .text-gray-900,
+.dark .text-gray-600,
+.dark .text-gray-500 {
+  color: #fff !important;
+}
+
+/* Accessibility: skip link */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  background: #1f2937;
+  color: #fff;
+  border-radius: 4px;
+  z-index: 60;
+}
+
+:focus-visible { outline: 3px solid #12329c; outline-offset: 2px; }
+/* Dark mode icon animation */
+#dark-mode-icon { position:relative; width:24px; height:24px; }
+#dark-mode-icon i { transition:transform 0.4s ease,opacity 0.4s ease; }
+#moon-icon { transform:scale(0.5) rotate(90deg); opacity:0; }
+.dark #sun-icon { transform:scale(0.5) rotate(-90deg); opacity:0; }
+.dark #moon-icon { transform:scale(1) rotate(0deg); opacity:1; }
+
+/* TOC transition */
+.toc {
+  transition: transform 0.35s ease, opacity 0.25s ease;
+  will-change: transform, opacity;
+}
+.toc-collapsed {
+  transform: translateX(-105%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+  /* Small open button (shown when TOC is collapsed) */
+  #toc-open-btn {
+    display: none; /* shown when toc is collapsed via adjacent selector below */
+    position: fixed;
+    left: 8px;
+    top: 20%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 9999px;
+    background: #535353cc;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    border: 1px solid rgba(0,0,0,0.06);
+    align-items: center;
+    justify-content: center;
+    z-index: 70;
+    cursor: pointer;
+  }
+  #toc-open-btn:focus { outline: 3px solid #062f95; }
+
+  /* Show the small open button when the toc is collapsed (aside.toc + button) */
+  aside.toc.toc-collapsed + #toc-open-btn { display: flex; }
+
+/* Prose readability fix */
+.prose h1, .prose h2, .prose h3, .prose p {
+  color:inherit;
+}
+/* Improved typography for readability */
+html { font-size: 18px; }
+body { line-height: 1.65; }
+.prose {
+  word-wrap: break-word;
+  hyphens: auto;
+}
+.prose h1 { font-size: 2rem; margin: 0 0 0.5rem 0; line-height: 1.15; }
+.prose h2 { font-size: 1.5rem; margin: 1.25rem 0 0.5rem 0; }
+.prose h3 { font-size: 1.125rem; margin: 1rem 0 0.5rem 0; }
+.prose p { font-size: 1rem; margin: 0 0 1rem 0; color: #374151; }
+.prose ol, .prose ul { margin: 0 0 1rem 1.25rem; }
+.prose blockquote { border-left: 4px solid #e5e7eb; padding: 0.5rem 1rem; color: #6b7280; background: #fafafa; margin: 1rem 0; }
+.prose code { background: #11182710; padding: 0.125rem 0.25rem; border-radius: 4px; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Helvetica Neue', monospace; }
+.prose pre { background: #0f172a; color: #e6eef8; padding: 0.75rem; border-radius: 6px; overflow:auto; }
+.prose img { max-width: 100%; height: auto; display: block; margin: 1rem 0; }
+
+/* Make TOC sticky on large screens and compact on small screens */
+.toc { position: static; }
+@media(min-width:1024px) {
+  .toc { position: sticky; top: 6rem; max-height: calc(100vh - 8rem); overflow:auto; }
+}
+
+/* Slight visual lift for article container */
+article { padding: 0.5rem; }
+
+/* Reading progress bar */
+#progress-container { position: fixed; top: 0; left: 0; width: 100%; height: 4px; background: transparent; z-index: 60; }
+#progress-bar { width: 0%; height: 100%; background: linear-gradient(90deg,#2563eb,#020952); transition: width 120ms linear; transform-origin: left center; }
+@media (prefers-reduced-motion: reduce) {
+  #progress-bar { transition: none; }
+}
+.prose ol li, 
+.prose ol li a {
+  color: #000; /* light mode */
+}
+.prose.dark ol li, 
+.prose.dark ol li a {
+  color: #e6eef8; /* dark mode */
+}
+</style>
+  <link rel="stylesheet" href="assets/header.css">
+</head>
+
+<body class="min-h-screen">
+
+  <!-- Top reading progress bar -->
+  <div id="progress-container" aria-hidden="true">
+    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 shadow-sm bg-black border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="#" class="text-3xl font-bold text-blue-800">ByteRead</a>
+            <div class="flex items-center space-x-4">
+              <!-- Floating dark-mode toggle will be injected here by assets/header.js -->
+            </div>
+      </div>
+  </header>
+
+<main class="max-w-7xl mx-auto px-4 py-8 lg:grid lg:grid-cols-12 gap-x-8">
+
+  <!-- TOC Sidebar -->
+<aside
+  id="toc"
+  class="toc lg:col-span-3 bg-white dark:bg-black border border-white dark:border-gray-900 
+         rounded-xl p-5 mb-8 lg:mb-0 shadow-md"
+>
+  <div class="flex items-center justify-between mb-3">
+    <h2 class="text-lg font-semibold text-black dark:text-gray-100">Contents</h2>
+    <button
+      id="toc-toggle"
+      class="text-xs font-medium text-black dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 
+             transition-colors"
+    >
+      Toggle
+    </button>
+  </div>
+
+  <nav>
+    <ul
+      id="toc-list"
+      class="space-y-2 text-sm leading-relaxed text-gray-800 dark:text-gray-300 list-none"
+    >
+      <!-- Auto-generated TOC -->
+    </ul>
+  </nav>
+</aside>
+
+  <!-- Small open button for collapsed TOC -->
+  <button id="toc-open-btn" aria-label="Open table of contents" title="Open table of contents">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#111827" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+  </button>
+
+  <!-- Article Content -->
+  <article class="lg:col-span-9 prose prose-lg dark:prose-invert  max-w-full" style="max-width:65ch; margin:0 auto;">
+    <h1>The Grand Challenges: What Top University Research Says About AI’s Future</h1>
+
+    <p>
+      This report details the most pressing research questions being addressed in top university laboratories at the nexus of Artificial Intelligence (AI), Computer Science (CS), Biology, Neurology, Medicine, Ethics, and Philosophy. These questions represent foundational shifts in scientific methodology, clinical practice, and human self-understanding. The current research landscape is defined by a necessary integration of engineering rigor with profound ethical and philosophical consideration, moving beyond mere technological advancement toward the strategic governance of highly intelligent systems.
+    </p>
+
+    <h2>I. The Computational Foundations of Autonomous Biological Discovery and Automation</h2>
+
+    <p>
+      The integration of advanced computation with biological research seeks to transcend traditional human-centric scientific cycles, establishing AI as an active, hypothesis-generating partner. The strategic priority is to engineer closed-loop systems capable of autonomous scientific discovery, addressing challenges too complex or time-consuming for conventional methods.
+    </p>
+
+    <h3>A. The Challenge of Autonomous Science and Self-Driving Laboratories</h3>
+    <p>
+      A key research challenge is the development of autonomous, self-directing research facilities. Carnegie Mellon University (CMU), for instance, is prototyping "self-driving laboratories," also known as cloud or automated labs, to revolutionize research across chemistry, materials science, and biology, including biomedical engineering and tissue culture. These facilities leverage safe and trustworthy AI, high-performance computing, and automated instruments to tackle complicated, high-stakes challenges such as chronic disease, climate change, and food security.
+    </p>
+    <p>
+      A critical operational question within this domain involves scaling complex biological processes. The CMU prototype addresses the difficulty of growing highly heterogeneous cell types at scale, which requires varying and often delicate treatments in a table-top form factor. This application demonstrates that success hinges on integrating breakthrough technologies across the physical and virtual worlds, utilizing powerful foundation AI and physics-based models driven by multimodal data resources.
+    </p>
+    <p>
+      Simultaneously, the research focus is extending beyond physical automation into the virtualization of the scientific process itself. Stanford researchers have demonstrated "virtual labs" composed of agentic AI systems—large language models (LLMs) trained to mimic a research team, including an AI principal investigator. These systems demonstrate the ability to retrieve data, use various tools, communicate effectively, and engage in critical thinking, thereby generating hypotheses. One remarkable success involves the AI lab devising a concept for a better SARS-CoV-2 vaccine within a matter of days.
+    </p>
+    <p>
+      This rapid advancement signifies a fundamental paradigm shift. When an AI can formulate a complex therapeutic hypothesis quickly, the human role transitions from that of an active experimenter and analyst to the architect of the AI system and the curator of the governing ethical and scientific framework. The necessity for breakthrough foundational AI models is paramount, as these flexible, pre-trained systems must understand general scientific principles (e.g., physics-based models) to generalize and innovate across diverse domains, such as cell culture optimization or materials synthesis.
+    </p>
+
+    <h3>B. Genomics, Precision Medicine, and the Interpretation Crisis</h3>
+    <p>
+      In genomics and drug discovery, the grand challenge is deploying computational power to transcend existing human-codified knowledge, especially for synthesizing new hypotheses and accelerating the therapeutic pipeline. Research at UC San Diego (UCSD) has demonstrated the efficacy of LLMs, specifically GPT-4, in automating functional genomics research—the process of determining gene function and interaction. In testing, GPT-4 achieved a 73% accuracy rate in identifying functions of curated gene sets. Crucially, when presented with random gene sets, GPT-4 refused to provide a name in 87% of cases, suggesting a capacity to analyze with minimal "hallucination," while still generating detailed narratives to support its naming process.
+    </p>
+    <p>
+      This capability is essential because much of the most interesting and novel biology lies beyond the scope of established databases. The power of these systems lies not in simple data lookup, but in synthesizing complex information to generate fundamentally new, testable hypotheses in a fraction of the time required by traditional methods.
+    </p>
+    <p>
+      In cancer research, the goal is to leverage AI to decode DNA and understand inappropriate gene switching that leads to disease. While basic machine learning is useful, a strategic shift is occurring toward systems that provide explainable scientific prediction. The long-term work in cancer genomics involves integrating AI tools for testing treatment response with biophysical modeling. This approach requires instructing the computer to focus on human understanding codified into mathematical models, providing a physical basis for scientific predictions, rather than relying solely on opaque statistical correlations derived from machine learning.
+    </p>
+    <p>
+      The challenges of clinical translation in AI-driven drug discovery persist, specifically concerning data accessibility, interpretability, and robust validation. This suggests a resource allocation bottleneck: while algorithm development is rapid, the development of robust, standardized, and diverse training datasets, coupled with clear validation processes and ethical frameworks, remains a strategic priority for unlocking the full potential of AI in creating safer, more effective medicines.
+    </p>
+
+    <table border="1">
+      <caption><strong>Table 1: Grand Challenges in AI-Driven Life Science and Neuro-Modeling</strong></caption>
+      <thead>
+        <tr>
+          <th>Research Domain Intersection</th>
+          <th>Grand Challenge Question</th>
+          <th>Key Breakthroughs Required (CS/AI Focus)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI + Biology (Genomics/Drug Discovery)</td>
+          <td>How can we automate the functional characterization of novel gene sets and transcend the limitations of established databases?</td>
+          <td>Development of high-accuracy LLMs for hypothesis generation; integration with biophysical modeling for safety/efficacy prediction.</td>
+        </tr>
+        <tr>
+          <td>AI + Engineering (Automation)</td>
+          <td>How can autonomous, self-driving laboratories achieve scale, handle heterogeneous biological systems, and revolutionize materials science?</td>
+          <td>Foundation AI models driving high-performance computing; physics-based models for optimization of complex biological systems.</td>
+        </tr>
+        <tr>
+          <td>AI + Neurology (Cognition)</td>
+          <td>How can Foundation Models of the Brain (FMOB) successfully synthesize heterogeneous neuroscience data to reveal principles of cognition?</td>
+          <td>Novel aggregation methods to manage data heterogeneity; algorithms capable of learning latent structures from multimodal data.</td>
+        </tr>
+        <tr>
+          <td>Neuro + CS (Architecture)</td>
+          <td>What biological design principles can be translated into the next generation of robust, efficient, and biologically validated AI architectures?</td>
+          <td>Implementation of neural mechanisms like synaptic downscaling; integration of top-down modulation for emotion modeling.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>II. Decoding the Brain and Cognition: The Neuro-AI Frontier</h2>
+
+    <p>
+      The intersection of AI, CS, and Neurology/Biology is fundamentally bidirectional. Neuroscience provides architectural inspiration for more robust AI, and AI provides the only scalable methodology capable of synthesizing the overwhelming complexity of neural data.
+    </p>
+
+    <h3>A. Foundation Models of the Brain</h3>
+    <p>
+      The grand challenge in computational neuroscience is achieving a predictive, quantitative understanding of the brain—an ambition analogous to theoretical physics' success in unifying the understanding of the material world under simple mathematical laws. The objective is to construct "good brain emulators" capable of quantitatively predicting complex cognitive behaviors under arbitrary conditions.
+    </p>
+    <p>
+      Yale's Foundation Models of the Brain (FMOB) initiative directly addresses this limitation, which stems from massive data heterogeneity. FMOB seeks to overcome this by aggregating diverse data types—including cellular imaging, neural activity, behavioral parameters, and scientific text—to reveal general principles of cognition.
+    </p>
+    <p>
+      AI’s capacity to analyze torrents of neurological data and extract hidden patterns positions it as a perfect tool for hypothesis testing in neuroscience. Conversely, neuroscience validates and inspires better AI models. For instance, testing a deep neural network that incorporates brain-inspired innovations (like top-down modulation) against neuroimaging data enhances understanding of human emotional mechanisms.
+    </p>
+
+    <h2>III. Clinical Translation, Trust, and the Ethical Imperative in Medicine</h2>
+
+    <p>
+      AI’s penetration into clinical practice raises questions beyond performance: how do we create systems that are not only effective, but ethically deployable, interpretable, and trusted by patients and practitioners? The next generation of AI-enabled medicine depends on bridging gaps between laboratory innovation, real-world usability, and public legitimacy.
+    </p>
+
+    <h3>A. The Implementation and Usability Barrier</h3>
+    <p>
+      While AI models outperform clinicians on certain diagnostic tasks, integration into actual workflows remains slow. Hospitals report obstacles including lack of interoperability, unclear regulatory standards, and limited clinician training. Current research at Stanford and Mayo Clinic focuses on adaptive user-interface design—how AI feedback can be presented in ways that enhance rather than overwhelm clinical judgment.
+    </p>
+
+    <h3>B. Equity, Bias, and Social Responsibility</h3>
+    <p>
+      Data-driven systems risk amplifying existing inequalities if training datasets under-represent minority populations or low-resource settings. Ethical AI initiatives at MIT, Johns Hopkins, and Oxford are developing bias-auditing protocols that identify and quantify representation gaps. A core challenge is balancing model accuracy with fairness metrics without compromising clinical safety.
+    </p>
+
+    <h3>C. Governance, Traceability, and International Standardization</h3>
+    <p>
+      Cross-border governance of AI in healthcare demands transparency of model lineage, versioning, and decision logic. Global frameworks—such as WHO’s Ethics and Governance of AI for Health—call for “explainable pipelines,” where every data transformation and model update can be audited. Universities are experimenting with open-source medical AI registries modeled after pharmaceutical clinical-trial databases to foster reproducibility and accountability.
+    </p>
+
+    <h2>IV. Philosophy, Morality, and the Future of Agency</h2>
+
+    <h3>A. Moral Status and the Continuum of Agency</h3>
+    <p>
+      As AI systems acquire adaptive goals and self-directed behavior, philosophical questions re-emerge: at what threshold does an intelligent system deserve moral consideration? Research in cognitive science and moral philosophy at Harvard and Cambridge explores whether agency should be defined by consciousness, intentionality, or the capacity for suffering. These debates are shaping policy recommendations for autonomous medical decision systems and social robots.
+    </p>
+
+    <h3>B. Metaphysical and Epistemological Implications</h3>
+    <p>
+      The rise of AI challenges the traditional boundary between knower and known. If machines participate in scientific discovery, what becomes of “human understanding”? Some theorists argue that AI represents a new epistemic agent—one capable of forming genuine explanations independent of human intuition. This reframes epistemology itself as a multi-agent process, where truth emerges from collaboration between human and synthetic cognition.
+    </p>
+
+    <h2>V. Strategic Recommendations and Future Directions</h2>
+
+    <h3>A. Prioritizing Convergence Funding and Collaborative Structures</h3>
+    <p>
+      The convergence of AI, life sciences, and philosophy requires funding models that reward interdisciplinary collaboration rather than siloed expertise. Universities such as CMU, Yale, and Stanford are piloting “Convergence Institutes,” integrating computational labs with neuroscience, ethics, and clinical departments. Funding agencies should incentivize shared data infrastructure, hybrid PhD programs, and co-authored publications spanning CS and biomedical sciences.
+    </p>
+
+    <h3>B. Shifting Ethical Research to Outcome-Based Governance</h3>
+    <p>
+      Ethical frameworks must evolve from purely theoretical reflection to measurable governance. This involves embedding moral reasoning within the AI development pipeline—quantifying transparency, explainability, and equity as key performance indicators. The future of responsible AI depends not on static codes of conduct, but on dynamic, testable standards that evolve with the systems they regulate.
+    </p>
+
+    <h2>Works Cited</h2>
+    <ol class="rights list-decimal list-inside text-sm prose text-black dark:text-gray-400">
+      <li>
+        AI for Science | AI at CMU, accessed October 10, 2025, 
+        <a href="https://ai.cmu.edu/research-and-policy-impact/ai-for-science"
+         class="block text-sm leading-snug text-black dark:text-grey-100 hover:text-blue-900 transition mb-2"
+         target="_blank">
+        Go to link
+      </a>
+      </li>
+      <li>
+        Researchers create ‘virtual scientists’ to solve complex biological problems, accessed October 10, 2025, 
+        <a href="https://news.stanford.edu/stories/2025/07/ai-virtual-scientists-lab-llms"
+        class="block text-sm leading-snug text-black dark:text-grey-100 hover:text-blue-900 transition mb-2"
+        target="_blank">
+      Go to link
+    </a>
+      </li>
+      <li>
+        How Artificial Intelligence Could Automate Genomics Research – UC San Diego Today, accessed October 10, 2025,
+        <a href="https://today.ucsd.edu/story/how-artificial-intelligence-could-automate-genomics-research"
+        class="block text-sm leading-snug text-black dark:text-grey-100 hover:text-blue-900 transition mb-2"
+        target="_blank">
+      Go to link
+    </a>
+      </li>
+      <li>
+        WHO Guidance on Ethics and Governance of Artificial Intelligence for Health, World Health Organization (2023). 
+        <a href="https://www.who.int/publications/i/item/9789240029200"
+        class="block text-sm leading-snug text-black dark:text-grey-100 hover:text-blue-900 transition mb-2"
+        target="_blank">Go to link
+      </a>
+      </li>
+      <li>
+        Harvard Center for Bioethics – AI and Moral Status Symposium Proceedings (2024). 
+        <a href="https://bioethics.hms.harvard.edu"
+        class="block text-sm leading-snug text-black dark:text-grey-100 hover:text-blue-900 transition mb-2"
+        target="_blank">
+        Go to link
+      </a>
+      </li>
+    </ol>
+
+  </article>
+</main>
+
+
+<footer class="bg-black border-t border-gray-700 mt-16">
+  <div class="max-w-7xl mx-auto px-4 py-4 grid grid-cols-1 md:grid-cols-4 gap-6 text-gray-200">
+    
+    <!-- About -->
+    <div>
+      <h4 class="brand text-xl font-bold text-blue-800 mb-3">ByteRead</h4>
+      <p class="text-sm leading-relaxed">
+        ByteRead curates cutting-edge research reports. Stay informed on emerging trends and breakthroughs.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Quick Links</h4>
+      <ul class="space-y-1 text-sm">
+        <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+        <li><a href="article.html" class="hover:text-blue-600 transition">Articles</a></li>
+        <li><a href="#contact" class="hover:text-blue-600 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Connect</h4>
+      <ul class="space-y-1 text-sm">
+        <li>Email: <a href="mailto:ngwenyajohane@icloud.com" class="hover:text-blue-600 transition">Our developers</a></li>
+      </ul>
+    </div>
+
+    <!-- Contribute -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Contribute</h4>
+      <p class="text-sm mb-2 leading-relaxed">
+        Have an article or report you want featured? Submit it for review.
+      </p>
+      <a href="contribute.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition text-sm inline-block">
+        Submit it here
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Bottom copyright -->
+  <div class="rights text-center text-sm text-gray-950 dark:text-gray-950 py-5">
+    &copy; 2025 ByteRead. All rights reserved.
+  </div>
+</footer>
+
+
+<script>
+  // Generate TOC automatically, reading progress and TOC toggles
+  document.addEventListener('DOMContentLoaded', () => {
+    const tocList = document.getElementById('toc-list');
+    document.querySelectorAll('article h2, article h3').forEach((el, idx) => {
+      const id = 'heading-' + idx;
+      el.id = id;
+      const li = document.createElement('li');
+      li.style.marginLeft = el.tagName === 'H3' ? '1rem' : '0';
+      li.innerHTML = `<a href="#${id}" class="hover:text-blue-600 transition">${el.textContent}</a>`;
+      tocList.appendChild(li);
+    });
+
+    // TOC wiring is handled centrally by assets/header.js to avoid duplicate listeners
+
+    // Reading progress update
+    const progressBar = document.getElementById('progress-bar');
+    const articleEl = document.querySelector('article');
+    function updateProgress() {
+      if (!articleEl || !progressBar) return;
+      const rect = articleEl.getBoundingClientRect();
+      const articleTop = window.scrollY + rect.top;
+      const articleHeight = articleEl.offsetHeight;
+      const scrollY = window.scrollY || window.pageYOffset;
+      const progress = Math.min(100, Math.max(0, ((scrollY - articleTop) / (articleHeight - window.innerHeight)) * 100));
+      progressBar.style.width = `${progress}%`;
+      progressBar.setAttribute('aria-valuenow', String(Math.round(progress)));
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener('resize', updateProgress);
+    updateProgress();
+  });
+</script>
+<script src="assets/header.js" defer></script>
+</body>
+</html>

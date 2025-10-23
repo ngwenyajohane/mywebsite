@@ -1,0 +1,56 @@
+:root {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Light / dark backgrounds */
+body {
+  background-color: #f7f7f7;
+  color: #222;
+}
+html.dark body {
+  background-color: #1a1a1a;
+  color: #f3f4f6;
+}
+
+/* Smooth transitions for layout elements */
+.bg-white, .border, .shadow-sm {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.dark .bg-white { background-color: #262626; }
+.dark .border-gray-200 { border-color: #111010; }
+
+/* Article cards */
+.article-card:not(:last-child) {
+  border-bottom: 1px solid #e5e5e5;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.dark .article-card:not(:last-child) {
+  border-bottom: 1px solid #000000;
+}
+
+/* Dark mode toggle animation */
+#dark-mode-icon {
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+.dark #sun-icon { transform: scale(0.5) rotate(-90deg); opacity: 0; }
+.dark #moon-icon { transform: scale(1) rotate(0deg); opacity: 1; }
+#moon-icon { transform: scale(0.5) rotate(90deg); opacity: 0; }
+
+/* Retractable TOC */
+#toc {
+  transition: transform 0.3s ease;
+}
+
+/* Search */
+#searchInput {
+  transition: all 0.2s;
+}
+#searchInput:focus {
+  outline: 2px solid #2563eb;
+}

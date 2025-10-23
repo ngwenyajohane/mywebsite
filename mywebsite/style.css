@@ -1,0 +1,246 @@
+/* =========================
+   Header & Global Styles
+   ========================= */
+
+/* Reset & base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background: #fff;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Dark mode for body */
+html.dark body {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+/* =========================
+   Header
+   ========================= */
+
+header {
+  position: sticky;          /* sticks to top */
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;          /* light mode bg */
+  padding: 15px 20px;        /* controls height */
+  border-bottom: 1px solid #ddd;
+  z-index: 1000;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.25s ease;
+}
+
+/* Dark mode for header */
+html.dark header {
+  background: #1e1e1e;
+  border-bottom-color: #333;
+}
+
+/* Retractable header */
+header.retractable {
+  will-change: transform;
+  transition: transform 240ms cubic-bezier(.2,.9,.2,1);
+}
+
+header.retractable.is-hidden {
+  transform: translateY(-100%);
+}
+
+/* Header content container */
+header .header-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Site title / logo */
+header .logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #236ae8;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+html.dark header .logo {
+  color: #90cdf4; /* lighter blue in dark mode */
+}
+
+/* Header buttons */
+header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+header button:hover {
+  background-color: #f0f0f0;
+}
+
+html.dark header button:hover {
+  background-color: #333;
+}
+
+/* Dark mode toggle icons */
+#dark-mode-icon {
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+#sun-icon {
+  transform: scale(0.5) rotate(90deg);
+  opacity: 0;
+}
+
+html.dark #sun-icon {
+  transform: scale(0.5) rotate(-90deg);
+  opacity: 0;
+}
+
+#moon-icon {
+  transform: scale(0.5) rotate(90deg);
+  opacity: 0;
+}
+
+html.dark #moon-icon {
+  transform: scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* =========================
+   Accessibility
+   ========================= */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  background: #111827;
+  color: #fff;
+  border-radius: 4px;
+  z-index: 60;
+}
+
+:focus-visible {
+  outline: 3px solid #60a5fa;
+  outline-offset: 2px;
+}
+
+/* =========================
+   Sidebar (Table of Contents)
+   ========================= */
+#sidebar {
+  position: fixed;
+  left: -260px;
+  top: 0;
+  height: 100%;
+  width: 240px;
+  background: #f0f0f0;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  transition: left 0.3s, background-color 0.3s, border-color 0.3s;
+  z-index: 999;
+}
+
+html.dark #sidebar {
+  background: #262626;
+  border-right-color: #333;
+  color: #ffffff;
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+#sidebar ul {
+  list-style: none;
+  padding: 10px;
+}
+
+#sidebar ul li {
+  margin: 10px 0;
+}
+
+#sidebar ul li a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+html.dark #sidebar ul li a {
+  color: #ffffff;
+}
+
+/* =========================
+   Main content
+   ========================= */
+main {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* =========================
+   Article cards
+   ========================= */
+.article-card {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  color: #0f172a;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+html.dark .article-card {
+  background: #1e1e1e;
+  color: #e6eef8;
+  border-bottom: 1px solid #333;
+}
+
+/* Article card borders */
+.article-card:not(:last-child) {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+html.dark .article-card:not(:last-child) {
+  border-bottom-color: #333;
+}
+
+/* =========================
+   Text Colors (force white in dark mode)
+   ========================= */
+html.dark body,
+html.dark body * {
+  color: #ffffff !important;
+  background-color: inherit !important;
+}

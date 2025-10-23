@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contribute to ByteRead - submit articles and research reports.">
+    <meta name="theme-color" content="#ffffff">
+    <title>Contribute – ByteRead</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23236ae8'/%3E%3Ctext x='50' y='57' font-size='50' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'%3E%3C/tspan%3E%3C/text%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+        <style>
+                /* Ensure cards are white with black text in light mode (fix selector and add overrides) */
+                html:not(.dark) .article-card,
+                html:not(.dark) aside {
+                    background-color: #ffffff !important;
+                    color: #111827 !important;
+                }
+                /* Ensure inner text and links within cards are dark in light mode */
+                html:not(.dark) .article-card p,
+                html:not(.dark) .article-card li,
+                html:not(.dark) .article-card a,
+                html:not(.dark) aside p,
+                html:not(.dark) aside h3 {
+                    color: #111827 !important;
+                }
+
+                :root { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        body { background-color: #fff; color: #000; transition: background-color 0.3s, color 0.3s; }
+        html.dark body { background-color: #1a1a1a; color: #fff; }
+
+        .bg-white, .border, .shadow-sm { transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s; }
+        .dark .bg-white { background-color: #000000; }
+        .dark .text-gray-900 { color: #fff; }
+        .dark .text-gray-700 { color: #e6eef8; }
+        .dark .text-gray-500 { color: #cbd5e1; }
+
+        .article-card { color: #0f172a; }
+        .dark .article-card { color: #e6eef8; }
+
+        #dark-mode-icon { transition: transform 0.4s ease, opacity 0.4s ease; }
+        #moon-icon { transform: scale(0.5) rotate(90deg); opacity: 0; }
+        .dark #sun-icon { transform: scale(0.5) rotate(-90deg); opacity: 0; }
+        .dark #moon-icon { transform: scale(1) rotate(0deg); opacity: 1; }
+
+        .skip-link { position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+        .skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 0.75rem; background: #111827; color: #fff; border-radius: 4px; z-index: 60; }
+        :focus-visible { outline: 3px solid #042768; outline-offset: 2px; }
+
+        header.retractable { will-change: transform; transition: transform 240ms cubic-bezier(.2,.9,.2,1); }
+        header.retractable.is-hidden { transform: translateY(-100%); }
+    </style>
+    <link rel="stylesheet" href="assets/header.css">
+</head>
+<body class="min-h-screen">
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-20 shadow-sm bg-black border-b border-gray-200 retractable">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="index.html" class="text-4xl font-bold text-blue-800">ByteRead</a>
+            <div class="flex items-center space-x-4">
+                <!-- Dark mode toggle injected here -->
+            </div>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main id="main-content" class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-x-8">
+        <section class="lg:col-span-8">
+            <h2 class="text-2xl font-bold border-b-2 border-blue-600 pb-2 mb-6">Contribute an Article</h2>
+
+            <div class="article-card bg-white dark:bg-black p-6 rounded-sm shadow-sm mb-6">
+                <p class="text-gray-800 dark:text-gray-100 mb-4 leading-relaxed">
+                    We welcome articles, research findings, and insightful reports from students, professionals, and researchers. Follow the steps below to submit your work for review.
+                </p>
+
+                <ol class="list-decimal list-inside text-black dark:text-gray-100 space-y-3 mb-6">
+                    <li>Prepare your article in Google doc or Word format.</li>
+                    <li>Include your name, email, and a brief bio.</li>
+                    <li>Provide a short abstract or summary.</li>
+                    <li>Email your submission to: 
+                        <a href="mailto:ngwenyajohane@icloud.com" class="text-blue-400 dark:text-blue-400 hover:underline">Our Editorial Board</a>
+                    </li>
+                    <li>We will review your submission and contact you with next steps.</li>
+                </ol>
+
+                <a href="mailto:ngwenyajohane@icloud.com" class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-500 transition">
+                    Submit Your Article
+                </a>
+            </div>
+        </section>
+
+        <aside class="lg:col-span-4 hidden lg:block">
+            <div class="article-card bg-white dark:bg-black p-6 border border-gray-200 dark:border-gray-700 rounded-sm mb-6">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2 mb-4">About ByteRead</h3>
+                <p class="text-sm text-gray-800 dark:text-gray-100 leading-relaxed">
+                    ByteRead curates cutting-edge research reports and scientific articles with a focus on AI, CS, Biology, and more.
+                </p>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gray-700 mt-16">
+        <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-gray-200">
+
+            <!-- About -->
+            <div>
+                <h4 class="brand text-xl font-bold text-blue-800 mb-3">ByteRead</h4>
+                <p class="text-sm leading-relaxed">
+                    ByteRead curates cutting-edge research reports. Stay informed on emerging trends and breakthroughs.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-xl font-bold mb-3">Quick Links</h4>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+                    <li><a href="article.html" class="hover:text-blue-600 transition">Articles</a></li>
+                    <li><a href="#contact" class="hover:text-blue-600 transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div>
+                <h4 class="text-xl font-bold mb-3">Connect</h4>
+                <ul class="space-y-1 text-sm">
+                    <li>Email: <a href="mailto:ngwenyajohane@icloud.com" class="hover:text-blue-600 transition">Our developers</a></li>
+                </ul>
+            </div>
+
+            <!-- Contribute -->
+            <div>
+                <h4 class="text-xl font-bold mb-3">Contribute</h4>
+                <p class="text-sm mb-2 leading-relaxed">
+                    Have an article or report you want featured? Submit it for review.
+                </p>
+                <a href="contribute.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition text-sm inline-block">
+                    Submit it here
+                </a>
+            </div>
+
+        </div>
+
+        <div class="rights text-center text-sm text-gray-400 py-5">
+            &copy; 2025 ByteRead. All rights reserved.
+        </div>
+    </footer>
+
+    <script src="assets/header.js" defer></script>
+</body>
+</html>

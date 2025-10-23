@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kweku Article — ByteRead</title>
+  <meta name="description" content="Article imported from Bitdocs by Etornam Kweku Tsetse">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='16' fill='%23236ae8'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+
+  <style>
+    :root { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    body { background:#fff; color:#111; transition: background-color .3s, color .3s; }
+    html.dark body { background:#121212; color:#e6eef8; }
+
+    #progress-container{position:fixed;top:0;left:0;width:100%;height:4px;z-index:60}
+    #progress-bar{width:0;height:100%;background:linear-gradient(90deg,#2563eb,#000461);transition:width 120ms linear}
+
+    .toc{transition:transform .35s,opacity .25s}
+    .toc-collapsed{transform:translateX(-105%);opacity:0;pointer-events:none}
+    #countdown.fade-out { opacity: 0; transition: opacity .5s ease; }
+  </style>
+  <link rel="stylesheet" href="assets/header.css">
+</head>
+
+  <body class="min-h-screen">
+
+  <!-- Reading Progress -->
+  <div id="progress-container" aria-hidden="true">
+    <div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
+  </div>
+
+  <header class="sticky top-0 z-20 shadow-sm bg-black border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="#" class="text-4xl font-bold text-blue-800">ByteRead</a>
+      <div class="flex items-center space-x-4">
+        <!-- Floating dark-mode toggle will be injected here by assets/header.js -->
+      </div>
+      </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-12 gap-x-8">
+
+    <!-- Article -->
+    <article class="lg:col-span-9 prose prose-lg dark:prose-invert max-w-full">
+
+      <h1 class="text-3xl font-extrabold text-black dark:text-white mb-4">Synaptic Refinement as a Neural Framework for Focused Coping: Recovery Through Developmental Neuroscience</h1>
+
+      <!-- Preview (inline, blends with page background) -->
+      <p class="mt-2 text-base text-gray-900 dark:text-white leading-relaxed">
+        For adolescents trapped in cycles of substance addiction, what’s more effective: amassing many coping strategies or committing to one that truly resonates? Drawing on developmental neuroscience and addiction research, this paper argues for the latter. Synaptic refinement—the strengthening of essential neural pathways while pruning inefficient ones—offers both a mechanism and a model for recovery. We synthesize evidence on adolescent brain maturation, self-control circuitry (ACC–mPFC–striatal loops), and intervention studies (e.g., mindfulness/IBMT) to propose that focused, high-repetition practice of a single coping skill stabilizes control networks, reduces cognitive load, and lowers relapse risk. We outline a theory-driven trial contrasting a focused-coping protocol with a multi-coping skills menu, specify neural and behavioral endpoints, and discuss clinical integration. The thesis reframes treatment design to align with developmental optimization: strengthen what matters; prune the rest.
+      </p>
+      <br><br>
+
+  <div class="text-gray-900 dark:text-white border rounded-sm p-4 mb-6">
+        <p class="text-sm text-gray-900 dark:text-gray-400">Source:
+          <a href="https://kweku.bitdocs.ai/share/d/VbZM9hVi5CdFjcZW" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">
+            https://kweku.bitdocs.ai/share/d/VbZM9hVi5CdFjcZW
+          </a>
+      </div>
+
+      <!-- Article Preview -->
+      <div id="kweku-content">
+        <div id="redirect-card" class="mt-8 p-6 border rounded-sm  text-gray-900 dark:text-white text-center shadow-sm transition-all">
+          <p class="mb-3 text-lg font-semibold text-gray-900 dark:text-white">Want to read the full article?</p>
+          <div class="flex justify-center flex-wrap gap-3">
+            <a id="open-original" href="https://kweku.bitdocs.ai/share/d/VbZM9hVi5CdFjcZW"
+               target="_blank" rel="noopener noreferrer"
+               class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">
+              Open Original
+            </a>
+            <button id="cancel-redirect" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded-md transition">
+              Cancel
+            </button>
+          </div>
+          <p id="countdown" class="mt-3 text-sm text-gray-900 dark:text-gray-300">
+            Auto-redirecting in <span id="count">60</span> seconds…
+          </p>
+        </div>
+      </div>
+
+      <noscript>
+        <p class="mt-4 text-sm text-gray-900 dark:text-gray-400">
+          JavaScript is disabled — you can <a href="https://kweku.bitdocs.ai/share/d/VbZM9hVi5CdFjcZW" target="_blank" class="text-blue-600 hover:underline">read the full article here</a>.
+        </p>
+      </noscript>
+
+    </article>
+  </main>
+
+
+  <footer class="bg-black border-t border-gray-700 mt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6 text-gray-200">
+    
+    <!-- About -->
+    <div>
+      <h4 class="brand text-xl font-bold text-blue-700 mb-3">ByteRead</h4>
+      <p class="text-sm leading-relaxed">
+        ByteRead curates cutting-edge research reports. Stay informed on emerging trends and breakthroughs.
+      </p>
+    </div>
+
+    <!-- Quick Links -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Quick Links</h4>
+      <ul class="space-y-1 text-sm">
+        <li><a href="index.html" class="hover:text-blue-600 transition">Home</a></li>
+        <li><a href="article.html" class="hover:text-blue-600 transition">Articles</a></li>
+        <li><a href="#contact" class="hover:text-blue-600 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Connect -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Connect</h4>
+      <ul class="space-y-1 text-sm">
+        <li>Email: <a href="mailto:ngwenyajohane@icloud.com" class="hover:text-blue-600 transition">Our developers</a></li>
+      </ul>
+    </div>
+
+    <!-- Contribute -->
+    <div>
+      <h4 class="text-xl font-bold mb-3">Contribute</h4>
+      <p class="text-sm mb-2 leading-relaxed">
+        Have an article or report you want featured? Submit it for review.
+      </p>
+      <a href="contribute.html" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 transition text-sm inline-block">
+        Submit it here
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Bottom copyright -->
+  <div class="rights text-center text-sm text-white py-5">
+    &copy; 2025 ByteRead. All rights reserved.
+  </div>
+</footer>
+
+
+  <!-- JS -->
+  <script>
+    // TOC, progress and redirect logic remain here; dark-mode is handled centrally in assets/header.js
+    document.addEventListener('DOMContentLoaded', () => {
+  // TOC toggle is handled by assets/header.js
+
+      // Reading progress
+      const progressBar = document.getElementById('progress-bar');
+      const articleEl = document.querySelector('article');
+      function updateProgress(){
+        if(!articleEl||!progressBar) return;
+        const rect = articleEl.getBoundingClientRect();
+        const articleTop = window.scrollY + rect.top;
+        const articleHeight = articleEl.offsetHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        const progress = Math.min(100, Math.max(0, ((scrollY - articleTop) / (articleHeight - window.innerHeight)) * 100));
+        progressBar.style.width = progress + '%';
+        progressBar.setAttribute('aria-valuenow', Math.round(progress));
+      }
+      window.addEventListener('scroll', updateProgress, {passive:true});
+      window.addEventListener('resize', updateProgress);
+      updateProgress();
+
+      // Redirect logic
+      (function(){
+        const url = 'https://kweku.bitdocs.ai/share/d/VbZM9hVi5CdFjcZW';
+        const startSeconds = 60; // 1 minute
+        let seconds = startSeconds;
+        let timer = null;
+        const countEl = document.getElementById('count');
+        const countdownEl = document.getElementById('countdown');
+        const redirectNowBtn = document.getElementById('redirect-now');
+        const openOriginal = document.getElementById('open-original');
+        const cancelBtn = document.getElementById('cancel-redirect');
+
+        function update() {
+          if (!countEl) return;
+          countEl.textContent = String(seconds);
+          if (seconds <= 0) {
+            clearInterval(timer);
+            window.location.href = url;
+          }
+          seconds -= 1;
+        }
+
+        // Start countdown immediately
+        timer = setInterval(update, 1000);
+
+        redirectNowBtn?.addEventListener('click', () => {
+          clearInterval(timer);
+          window.location.href = url;
+        });
+
+        openOriginal?.addEventListener('click', () => {
+          clearInterval(timer);
+          countdownEl.textContent = 'Opened in a new tab. Redirect canceled.';
+          countdownEl.classList.add('fade-out');
+        });
+
+        cancelBtn?.addEventListener('click', () => {
+          clearInterval(timer);
+          countdownEl.textContent = 'Auto-redirect canceled.';
+          countdownEl.classList.add('fade-out');
+        });
+      })();
+    });
+  </script>
+
+  <script src="assets/header.js" defer></script>
+</body>
+</html>

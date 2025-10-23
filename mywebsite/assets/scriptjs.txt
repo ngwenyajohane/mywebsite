@@ -1,0 +1,51 @@
+// Initialize icons
+function renderIcons() {
+  if (window.lucide) lucide.createIcons();
+}
+
+// Initialize dark mode
+function initDarkMode() {
+  const htmlEl = document.documentElement;
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const dark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+  if (dark) htmlEl.classList.add('dark');
+}
+
+// Toggle dark mode
+function toggleDarkMode() {
+  const htmlEl = document.documentElement;
+  const dark = htmlEl.classList.toggle('dark');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+}
+
+// Sidebar TOC toggles
+function setupTOC() {
+  const toc = document.getElementById('toc');
+  const openBtn = document.getElementById('open-toc');
+  const closeBtn = document.getElementById('close-toc');
+  if (!toc || !openBtn || !closeBtn) return;
+  openBtn.addEventListener('click', () => toc.classList.remove('-translate-x-full'));
+  closeBtn.addEventListener('click', () => toc.classList.add('-translate-x-full'));
+}
+
+// Article search/filter
+function setupSearch() {
+  const input = document.getElementById('searchInput');
+  if (!input) return;
+  input.addEventListener('input', () => {
+    const term = input.value.toLowerCase();
+    document.querySelectorAll('.article-card').forEach(card => {
+      const text = card.innerText.toLowerCase();
+      card.style.display = text.includes(term) ? '' : 'none';
+    });
+  });
+}
+
+// Run on load
+window.addEventListener('load', () => {
+  renderIcons();
+  initDarkMode();
+  setupTOC();
+  setupSearch();
+});

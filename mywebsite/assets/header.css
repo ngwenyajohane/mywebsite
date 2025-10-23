@@ -1,0 +1,313 @@
+/* Shared header styles */
+header.retractable { will-change: transform; transition: transform 240ms cubic-bezier(.2,.9,.2,1); }
+header.retractable.is-hidden { transform: translateY(-100%); }
+
+/* Ensure header sits above progress bar and other elements */
+header { z-index: 60; }
+
+/* When the table of contents is fully collapsed, make the article occupy the
+	 central column on large screens so the reading column drifts to center. */
+@media (min-width: 1024px) {
+	/* hide the toc element visually (it remains in DOM so the open button works) */
+	aside.toc.toc-collapsed { display: none; }
+
+	/* make the article span the full grid and center its content */
+	aside.toc.toc-collapsed ~ article {
+		grid-column: 1 / -1 !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+			max-width: 75ch; /* slightly wider comfortable measure */
+			transition: margin 360ms ease, transform 360ms ease;
+	}
+}
+
+/* ----- Dark mode article typography ----- */
+.dark .prose {
+  color: #e5e7eb; /* Soft white-gray for body text */
+}
+
+/* Headings: bright but not pure white */
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4,
+.dark .prose h5,
+.dark .prose h6 {
+  color: #ffffff; /* Pure white for titles */
+  font-weight: 700;
+}
+
+/* Body text */
+.dark .prose p,
+.dark .prose li,
+.dark .prose span {
+  color: #e5e7eb; /* Gentle contrast for paragraphs */
+}
+
+/* Links: calm blue accent */
+.dark .prose a {
+  color: #60a5fa; /* Tailwind blue-400 */
+  text-decoration: none;
+}
+
+.dark .prose a:hover {
+  color: #93c5fd; /* Slightly brighter on hover */
+  text-decoration: underline;
+}
+
+/* Blockquotes and emphasis for a touch of elegance */
+.dark .prose blockquote {
+  color: #d1d5db;
+  border-left: 4px solid #60a5fa;
+}
+
+.dark .prose strong {
+  color: #f3f4f6; /* Soft white */
+  font-weight: 600;
+}
+
+/* Floating dark-mode toggle styles */
+.floating-dark-toggle {
+  position: fixed;
+  right: 1rem;
+  top: calc(4rem + 0.5rem); /* sit visually under sticky header (header height ~4rem) */
+  z-index: 70;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.floating-dark-toggle:focus { outline: 3px solid #60a5fa; }
+.floating-dark-toggle:hover { transform: translateY(-2px); }
+
+/* Dark theme variant for floating toggle */
+.dark .floating-dark-toggle {
+  background: rgba(10,10,10,0.85);
+  border-color: rgba(255,255,255,0.06);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+}
+
+/* Smaller screens: tuck the toggle a little further from the edge */
+@media (max-width: 640px) {
+  .floating-dark-toggle { right: 0.75rem; top: calc(3.5rem + 0.5rem); }
+}
+
+/* Rules for the user-provided toggle markup */
+.floating-dark-toggle-wrapper { position: relative; }
+.floating-dark-toggle-wrapper > button#dark-mode-toggle { position: fixed; right: 1rem; top: calc(4rem + 0.5rem); z-index: 75; }
+.floating-dark-toggle-wrapper > button#dark-mode-toggle .shadow-inner { box-shadow: inset 0 2px 4px rgba(0,0,0,0.06); }
+.floating-dark-toggle-wrapper button#dark-mode-toggle:focus { outline: 3px solid #60a5fa; }
+
+/* Ensure the handle is elevated and transitions smoothly */
+#toggle-handle { width: 1.75rem; height: 1.75rem; left: 0.125rem; top: 0.125rem; }
+#dark-mode-toggle .w-4.h-4 { width: 1rem; height: 1rem; }
+
+/* When in dark mode, move the handle to the right and swap icon visibility via .dark classes */
+html.dark #toggle-handle { transform: translateX(26px); }
+html:not(.dark) #toggle-handle { transform: translateX(0); }
+
+/* Small fallback for translate-x-6 utility if Tailwind runtime isn't present */
+.translate-x-6 { transform: translateX(26px) !important; }
+
+
+/* --- TOC Scrollbar Styles --- */
+#toc {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+#toc::-webkit-scrollbar {
+  width: 6px;
+}
+
+#toc::-webkit-scrollbar-thumb {
+  background-color: #a1a1aa;
+  border-radius: 3px;
+}
+
+#toc::-webkit-scrollbar-thumb:hover {
+  background-color: #71717a;
+}
+
+#toc::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+html.dark #toc::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+}
+html.dark #toc::-webkit-scrollbar-thumb:hover {
+  background-color: #9ca3af;
+}
+
+/* Light-mode card defaults: ensure card-like UI is white with dark text when not in dark mode */
+html:not(.dark) .article-card,
+html:not(.dark) aside,
+html:not(.dark) .card,
+html:not(.dark) .panel,
+html:not(.dark) .panel-body {
+  background-color: #ffffff !important;
+  color: #0f172a !important; /* Tailwind gray-900 */
+}
+
+/* Inner text within cards */
+html:not(.dark) .article-card p,
+html:not(.dark) .article-card li,
+html:not(.dark) .article-card a,
+html:not(.dark) aside p,
+html:not(.dark) aside h3,
+html:not(.dark) .card p,
+html:not(.dark) .panel p {
+  color: #0f172a !important;
+}
+
+/* Ensure the prose content (article body and headings) is dark in light mode */
+html:not(.dark) .prose {
+  color: #0f172a !important; /* dark body text */
+}
+html:not(.dark) .prose h1,
+html:not(.dark) .prose h2,
+html:not(.dark) .prose h3,
+html:not(.dark) .prose h4 {
+  color: #0b1220 !important; /* near-black for headings */
+}
+
+
+
+
+
+
+/* Strong light-mode text defaults for article/prose only */
+html:not(.dark) .prose,
+html:not(.dark) .prose * {
+  color: #0b1220 !important; /* dark text for articles */
+}
+
+/* Exclude footer completely */
+html:not(.dark) footer,
+html:not(.dark) footer * {
+  color: inherit !important; /* keep footer colors intact */
+}
+
+/* Restore footer brand text if needed */
+footer .rights {
+  color: #9ca3af !important; /* gray-400 */
+}
+
+/* Light-mode link styles inside articles */
+html:not(.dark) .prose a {
+  color: #2563eb !important; /* Tailwind blue-600 */
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+html:not(.dark) .prose a:hover {
+  color: #1d4ed8 !important; /* blue-700 glow */
+  text-decoration: underline;
+  text-shadow: 0 0 4px rgba(37, 99, 235, 0.4);
+}
+
+
+
+
+
+
+
+/* Headings everywhere in light mode should be clearly dark */
+html:not(.dark) h1,
+html:not(.dark) h2,
+html:not(.dark) h3,
+html:not(.dark) h4,
+html:not(.dark) h5,
+html:not(.dark) h6 {
+  color: #0b1220 !important;
+}
+
+/* Utility class overrides that may cause excessively light text in light mode
+   (for example footer using text-gray-200). We map them to near-black so
+   content remains readable on white backgrounds. */
+html:not(.dark) .text-gray-200,
+html:not(.dark) .text-gray-300,
+html:not(.dark) .text-gray-400 {
+  color: #0b1220 !important;
+}
+
+/* Restore footer text color in light mode
+   The global overrides above unintentionally darkened footer text that sits
+   on a dark footer background. Re-apply a light color for footer content so
+   it's readable against the footer's black background. */
+html:not(.dark) footer,
+html:not(.dark) footer * {
+  color: #e5e7eb !important; /* Tailwind gray-200 */
+}
+
+
+
+/* Force native form controls to be dark-on-white in light mode. This targets
+   inputs, textareas, selects, datalists, and contenteditable regions. We use
+   high specificity and !important to override inline or utility classes that
+   might force dark backgrounds in some imported content. */
+html:not(.dark) input,
+html:not(.dark) textarea,
+html:not(.dark) select,
+html:not(.dark) datalist,
+html:not(.dark) [contenteditable] {
+  background-color: #ffffff !important;
+  color: #0f172a !important; /* Tailwind gray-900 */
+  caret-color: #0b1220 !important;
+  border-color: #e5e7eb !important; /* subtle neutral border */
+}
+
+/* More specific for common input types used as text-boxes */
+html:not(.dark) input[type="text"],
+html:not(.dark) input[type="search"],
+html:not(.dark) input[type="email"],
+html:not(.dark) input[type="url"],
+html:not(.dark) input[type="tel"],
+html:not(.dark) input[type="password"],
+html:not(.dark) textarea {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Ensure placeholders are legible in light mode */
+html:not(.dark) ::placeholder {
+  color: #6b7280 !important; /* Tailwind gray-500 */
+  opacity: 1 !important;
+}
+
+/* Remove forced dark background utilities if present on controls */
+html:not(.dark) input[class*="bg-"],
+html:not(.dark) textarea[class*="bg-"],
+html:not(.dark) select[class*="bg-"] {
+  background-color: #ffffff !important;
+}
+
+
+footer .brand {
+  color: #1e40af !important;
+}
+
+/* Prevent footer rights text from being darkened in light mode */
+html:not(.dark) footer .brand,
+html:not(.dark) footer .brand * {
+  color: #1e40af !important; /* Tailwind gray-400 */
+}
+
+footer .rights {
+  color: #9ca3af !important;
+}
+/* Prevent footer rights text from being darkened in light mode */
+html:not(.dark) footer .rights,
+html:not(.dark) footer .rights * {
+  color: #9ca3af !important; /* Tailwind gray-400 */
+}
+
+
+
